@@ -52,6 +52,7 @@ public class CartController {
             .cpf(cart.getClient().getCpf())
             .clientName(cart.getClient().getName())
             .total(cart.getTotal())
+            .status(cart.getStatus().name())
             .items(convert(cart.getItems()))
             .build();
     }

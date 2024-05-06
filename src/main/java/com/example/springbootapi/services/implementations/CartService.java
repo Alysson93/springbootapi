@@ -16,6 +16,7 @@ import com.example.springbootapi.domain.repositories.CartRepository;
 import com.example.springbootapi.domain.repositories.ClientRepository;
 import com.example.springbootapi.domain.repositories.ItemRepository;
 import com.example.springbootapi.domain.repositories.ProductRepository;
+import com.example.springbootapi.enums.StatusCart;
 import com.example.springbootapi.exceptions.RegraNegocioException;
 import com.example.springbootapi.rest.dtos.CartRequestDTO;
 import com.example.springbootapi.rest.dtos.ItemRequestDTO;
@@ -38,6 +39,7 @@ public class CartService implements ICartService {
         Cart cart = new Cart();
         cart.setTotal(dto.getTotal());
         cart.setCreatedAt(LocalDate.now());
+        cart.setStatus(StatusCart.REALIZADO);
 
         Client client = clientRepository.findById(dto.getClientId())
             .orElseThrow(() -> new RegraNegocioException("Client not found"));

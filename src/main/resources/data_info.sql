@@ -17,7 +17,8 @@ create table carts(
     id integer primary key auto_increment,
     client_id integer references clients(id),
     created_at timestamp,
-    total numeric(20, 2)
+    total numeric(20, 2),
+    status varchar(20)
 );
 
 create table items(
