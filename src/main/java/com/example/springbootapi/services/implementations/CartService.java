@@ -2,6 +2,7 @@ package com.example.springbootapi.services.implementations;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -47,6 +48,11 @@ public class CartService implements ICartService {
         itemRepository.saveAll(items);
         cart.setItems(items);
         return cart;
+    }
+
+    @Override
+    public Optional<Cart> getCart(Integer id) {
+        return repository.findByIdFetchItems(id);
     }
 
     private List<Item> convertItems(Cart cart, List<ItemRequestDTO> items) {
