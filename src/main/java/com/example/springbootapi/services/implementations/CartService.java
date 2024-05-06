@@ -17,6 +17,7 @@ import com.example.springbootapi.domain.repositories.ClientRepository;
 import com.example.springbootapi.domain.repositories.ItemRepository;
 import com.example.springbootapi.domain.repositories.ProductRepository;
 import com.example.springbootapi.enums.StatusCart;
+import com.example.springbootapi.exceptions.CartNotFoundException;
 import com.example.springbootapi.exceptions.RegraNegocioException;
 import com.example.springbootapi.rest.dtos.CartRequestDTO;
 import com.example.springbootapi.rest.dtos.ItemRequestDTO;
@@ -55,6 +56,15 @@ public class CartService implements ICartService {
     @Override
     public Optional<Cart> getCart(Integer id) {
         return repository.findByIdFetchItems(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateStatus(Integer id, StatusCart status) {
+        repository.findById(id).map(c -> {
+            c.setStatus(status);
+            return repository.save(c);
+        }).orElseThrow(() -> new CartNotFoundException());
     }
 
     private List<Item> convertItems(Cart cart, List<ItemRequestDTO> items) {

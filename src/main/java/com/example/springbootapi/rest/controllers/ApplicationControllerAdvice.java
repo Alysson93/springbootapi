@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.example.springbootapi.exceptions.CartNotFoundException;
 import com.example.springbootapi.exceptions.RegraNegocioException;
 
 @RestControllerAdvice
@@ -15,6 +16,12 @@ public class ApplicationControllerAdvice {
     public ApiErrors handleRegraNegocioException(RegraNegocioException exception) {
         String message = exception.getMessage();
         return new ApiErrors(message);
+    }
+
+    @ExceptionHandler(CartNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrors handleCartNotFoundException(CartNotFoundException exception) {
+        return new ApiErrors(exception.getMessage());
     }
 
 }

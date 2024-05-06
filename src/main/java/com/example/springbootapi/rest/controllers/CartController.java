@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,9 +20,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.springbootapi.domain.entities.Cart;
 import com.example.springbootapi.domain.entities.Item;
+import com.example.springbootapi.enums.StatusCart;
 import com.example.springbootapi.rest.dtos.CartRequestDTO;
 import com.example.springbootapi.rest.dtos.CartRespondeDTO;
 import com.example.springbootapi.rest.dtos.ItemResponseDTO;
+import com.example.springbootapi.rest.dtos.StatusCartDTO;
 import com.example.springbootapi.services.interfaces.ICartService;
 
 @RestController
@@ -43,6 +46,12 @@ public class CartController {
     public Integer post(@RequestBody CartRequestDTO dto) {
         Cart cart = service.save(dto);
         return cart.getId();
+    }
+
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void patchStatus(@PathVariable Integer id, @RequestBody StatusCartDTO dto) {
+        service.updateStatus(id, StatusCart.valueOf(dto.getStatus()));
     }
 
     private CartRespondeDTO convert(Cart cart) {
