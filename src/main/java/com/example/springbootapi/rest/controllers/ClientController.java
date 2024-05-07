@@ -21,6 +21,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.springbootapi.domain.entities.Client;
 import com.example.springbootapi.domain.repositories.ClientRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/clients")
 public class ClientController {
@@ -49,7 +51,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer post(@RequestBody Client client) {
+    public Integer post(@RequestBody @Valid Client client) {
         repository.save(client);
         return client.getId();
     }

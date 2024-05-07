@@ -41,7 +41,7 @@ public class Cart {
     private BigDecimal total;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", length = 20)
     private StatusCart status;
 
     @OneToMany(mappedBy = "cart")

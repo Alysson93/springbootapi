@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,7 @@ public class Client {
     private Integer id;
 
     @Column(length = 100, nullable = false)
+    @NotEmpty(message = "Campo nome é obrigatório.")
     private String name;
 
     @Column(length = 15, nullable = false)
