@@ -2,6 +2,8 @@ package com.example.springbootapi.domain.entities;
 
 import java.util.Set;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +30,8 @@ public class Client {
     private String name;
 
     @Column(length = 15, nullable = false)
+    @NotEmpty(message = "Campo CPF é obrigatório.")
+    @CPF(message = "Informe um CPF válido.")
     private String cpf;
 
     @OneToMany(mappedBy = "client")

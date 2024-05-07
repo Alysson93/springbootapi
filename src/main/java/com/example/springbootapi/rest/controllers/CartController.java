@@ -27,6 +27,8 @@ import com.example.springbootapi.rest.dtos.ItemResponseDTO;
 import com.example.springbootapi.rest.dtos.StatusCartDTO;
 import com.example.springbootapi.services.interfaces.ICartService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/carts")
 public class CartController {
@@ -43,7 +45,7 @@ public class CartController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer post(@RequestBody CartRequestDTO dto) {
+    public Integer post(@RequestBody @Valid CartRequestDTO dto) {
         Cart cart = service.save(dto);
         return cart.getId();
     }

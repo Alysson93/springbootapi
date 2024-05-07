@@ -66,7 +66,7 @@ public class ClientController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void put(@PathVariable Integer id, @RequestBody Client client) {
+    public void put(@PathVariable Integer id, @RequestBody @Valid Client client) {
         Optional<Client> c = repository.findById(id);
         if (c.isPresent()) {
             client.setId(c.get().getId());

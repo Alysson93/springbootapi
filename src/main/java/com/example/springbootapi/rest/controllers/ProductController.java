@@ -17,6 +17,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.springbootapi.domain.entities.Product;
 import com.example.springbootapi.domain.repositories.ProductRepository;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,7 +53,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer post(@RequestBody Product product) {
+    public Integer post(@RequestBody @Valid Product product) {
         repository.save(product);
         return product.getId();
     }
@@ -65,7 +68,7 @@ public class ProductController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void put(@PathVariable Integer id, @RequestBody Product product) {
+    public void put(@PathVariable Integer id, @RequestBody @Valid Product product) {
         Optional<Product> p = repository.findById(id);
         if (p.isPresent()) {
             product.setId(p.get().getId());
