@@ -24,7 +24,7 @@ import com.example.springbootapi.domain.repositories.ClientRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/clients")
+@RequestMapping("/clients")
 public class ClientController {
 
     @Autowired

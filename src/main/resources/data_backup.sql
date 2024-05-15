@@ -28,3 +28,9 @@ create table items(
     qtd integer
 );
 
+create table users(
+    id integer primary key auto_increment,
+    login varchar(50) unique not null,
+    password varchar(100) not null,
+    role varchar(10) not null
+);
